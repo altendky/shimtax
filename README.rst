@@ -10,10 +10,10 @@ That file will register the shimtax encoding so you don't have to.
 
 .. code-block:: console
 
-    $ .venv/bin/shimtax register
+   $ .venv/bin/shimtax register
 
 The CLI can also remove the ``.pth`` file.
 
 .. code-block:: console
 
-    $ .venv/bin/shimtax unregister
+   $ .venv/bin/shimtax unregister
