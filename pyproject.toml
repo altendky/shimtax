@@ -54,7 +54,6 @@ build-backend = "poetry.core.masonry.api"
 target-version =  ['py37', 'py38', 'py39', 'py310', 'py311']
 include = '''
 ^/(
-    [^/]*.py
     | (src)/.*\.pyi?
 )$
 '''
