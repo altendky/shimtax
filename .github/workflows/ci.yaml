@@ -27,7 +27,7 @@ jobs:
         python:
           - name: CPython 3.9
             tox: py39
-            action: 3.9
+            action: "3.9"
         task:
           - name: Build
             tox: build
@@ -81,16 +81,16 @@ jobs:
         python:
           - name: CPython 3.7
             tox: py37
-            action: 3.7
+            action: "3.7"
           - name: CPython 3.8
             tox: py38
-            action: 3.8
+            action: "3.8"
           - name: CPython 3.9
             tox: py39
-            action: 3.9
+            action: "3.9"
           - name: CPython 3.10
             tox: py310
-            action: 3.10
+            action: "3.10"
         task:
           - name: Test
             tox: test
@@ -104,7 +104,7 @@ jobs:
               runs-on: ubuntu-latest
             python:
               name: CPython 3.9
-              action: 3.9
+              action: "3.9"
           - task:
               name: Check format
               tox: check-format
@@ -113,7 +113,7 @@ jobs:
               runs-on: ubuntu-latest
             python:
               name: CPython 3.9
-              action: 3.9
+              action: "3.9"
 
 
     env:
@@ -194,7 +194,7 @@ jobs:
               runs-on: ubuntu-latest
             python:
               name: CPython 3.8
-              action: 3.8
+              action: "3.8"
             task:
               name: Coverage
               tox: check-coverage
