@@ -35,7 +35,7 @@ jobs:
     env:
       # Should match name above
       JOB_NAME: ${{ matrix.task.name }} - ${{ matrix.os.name }} ${{ matrix.python.name }}
-      TOXENV: ${{ matrix.task.tox }}${{ fromJSON('["", "-"]')[matrix.python.tox != null] }}${{ matrix.python.tox }}
+      TOXENV: ${{ matrix.task.tox }}
 
     steps:
     - uses: actions/checkout@v3
