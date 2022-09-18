@@ -1,8 +1,9 @@
 import sys
 
+import pytest
+
 import shimtax._core
 import shimtax.errors
-import pytest
 
 
 def test_direct_coconut_works(pytester: pytest.Pytester) -> None:
