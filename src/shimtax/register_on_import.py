@@ -1,0 +1,3 @@
+import shimtax
+
+shimtax.register()

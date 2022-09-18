@@ -7,7 +7,7 @@ pth_name = "shimtax_register.pth"
 def write_pth() -> None:
     purelib = pathlib.Path(sysconfig.get_path("purelib"), pth_name)
 
-    content = """import os,sys;exec("import shimtax; shimtax.register()")\n"""
+    content = """import shimtax.register_on_import\n"""
 
     purelib.write_text(data=content, encoding="utf-8")
 
