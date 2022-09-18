@@ -1,10 +1,6 @@
-import pathlib
-import sysconfig
-
 import click
 
-
-pth_name = "shimtax_register.pth"
+import shimtax._pth
 
 
 @click.group(name="shimtax")
@@ -16,19 +12,13 @@ def main() -> None:
     name="register",
     help="Enable automatic registration via shimtax_register.pth.",
 )
-def register():
-    purelib = pathlib.Path(sysconfig.get_path("purelib"), pth_name)
-
-    content = """import os,sys;exec("import shimtax; shimtax.register()")\n"""
-
-    purelib.write_text(data=content, encoding="utf-8")
+def register() -> None:
+    shimtax._pth.write_pth()
 
 
 @main.command(
     name="unregister",
     help="Disable automatic registration via shimtax_register.pth.",
 )
-def unregister():
-    purelib = pathlib.Path(sysconfig.get_path("purelib"), pth_name)
-
-    purelib.unlink(missing_ok=True)
+def unregister() -> None:
+    shimtax._pth.delete_pth()
