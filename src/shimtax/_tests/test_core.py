@@ -3,7 +3,7 @@ import sys
 import pytest
 
 
-def test_direct_coconut_works(pytester):
+def test_direct_coconut_works(pytester: pytest.Pytester) -> None:
     pytester.makeconftest(
         """
         import coconut.convenience
@@ -30,7 +30,7 @@ def test_direct_coconut_works(pytester):
     reason="cursed-for fails in this pytester case for Python 3.9+",
     strict=True,
 )
-def test_direct_cursed_for_works(pytester):
+def test_direct_cursed_for_works(pytester: pytest.Pytester) -> None:
     pytester.makepyfile(
         """
         # coding: cursed_for

@@ -13,3 +13,6 @@ def search_function(encoding: str) -> typing.Optional[codecs.CodecInfo]:
 
     if encoding_base != codec_name:
         return None
+
+    # TODO: implement
+    raise NotImplementedError()
