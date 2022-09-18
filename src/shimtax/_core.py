@@ -6,7 +6,7 @@ import typing
 import shimtax.errors
 
 codec_name = "shimtax"
-pattern = re.compile("shimtax(?P<rest>(:[a-z_ \-]+)*)(\b|\n|$)")
+pattern = re.compile("shimtax(?P<rest>(:[a-z_ -]+)*)(\b|\n|$)")
 
 
 def get_codec_names(text: str) -> typing.List[str]:

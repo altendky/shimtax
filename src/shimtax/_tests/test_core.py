@@ -134,3 +134,42 @@ def test_just_two_work(
 
     result_outcomes = run_result.parseoutcomes()
     assert result_outcomes == {"passed": 1}
+
+
+@pytest.mark.no_shimtax
+def test_unregistered_fails(pytester: pytest.Pytester) -> None:
+    pytester.makepyfile(
+        """
+        # coding: shimtax
+        
+        def test():
+            assert False
+        """
+    )
+    run_result = pytester.runpytest()
+
+    result_outcomes = run_result.parseoutcomes()
+    assert result_outcomes == {"errors": 1}
+
+
+@pytest.mark.no_shimtax
+def test_register_passes(pytester: pytest.Pytester) -> None:
+    pytester.makeconftest(
+        """
+        import shimtax
+        
+        shimtax.register()
+        """
+    )
+    pytester.makepyfile(
+        """
+        # coding: shimtax
+
+        def test():
+            assert True
+        """
+    )
+    run_result = pytester.runpytest()
+
+    result_outcomes = run_result.parseoutcomes()
+    assert result_outcomes == {"passed": 1}
