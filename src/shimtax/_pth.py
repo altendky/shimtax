@@ -15,4 +15,8 @@ def write_pth() -> None:
 def delete_pth() -> None:
     purelib = pathlib.Path(sysconfig.get_path("purelib"), pth_name)
 
-    purelib.unlink(missing_ok=True)
+    try:
+        # missing_ok=True is 3.8+
+        purelib.unlink()
+    except FileNotFoundError:
+        pass
