@@ -95,16 +95,10 @@ jobs:
           - name: Test
             tox: test
             coverage: true
+          - name: Check hints
+            tox: check-hints
+            coverage: false
         include:
-          - task:
-              name: Check
-              tox: check
-            os:
-              name: Linux
-              runs-on: ubuntu-latest
-            python:
-              name: CPython 3.9
-              action: "3.9"
           - task:
               name: Check format
               tox: check-format
