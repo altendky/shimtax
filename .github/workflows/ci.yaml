@@ -85,6 +85,9 @@ jobs:
           - name: macOS
             runs-on: macos-latest
             matrix: macos
+          - name: Windows
+            runs-on: windows-latest
+            matrix: windows
         python:
           - name: CPython 3.7
             tox: py37
