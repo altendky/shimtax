@@ -74,7 +74,10 @@ def test_get_codec_names_raises_for_extra_text() -> None:
         shimtax._core.get_codec_names("shimtax:a+")
 
 
-def test_just_aaa_to_bbb_works(pytester: pytest.Pytester, enable_aaa_to_bbb: None) -> None:
+def test_just_aaa_to_bbb_works(
+    pytester: pytest.Pytester,
+    enable_aaa_to_bbb: None,
+) -> None:
     pytester.makepyfile(
         """
         # coding: shimtax:aaa_to_bbb
@@ -91,7 +94,10 @@ def test_just_aaa_to_bbb_works(pytester: pytest.Pytester, enable_aaa_to_bbb: Non
     assert result_outcomes == {"passed": 1}
 
 
-def test_just_ccc_to_ddd_works(pytester: pytest.Pytester, enable_ccc_to_ddd: None) -> None:
+def test_just_ccc_to_ddd_works(
+    pytester: pytest.Pytester,
+    enable_ccc_to_ddd: None,
+) -> None:
     pytester.makepyfile(
         """
         # coding: shimtax:ccc_to_ddd
@@ -108,7 +114,11 @@ def test_just_ccc_to_ddd_works(pytester: pytest.Pytester, enable_ccc_to_ddd: Non
     assert result_outcomes == {"passed": 1}
 
 
-def test_just_two_work(pytester: pytest.Pytester, enable_aaa_to_bbb: None, enable_ccc_to_ddd: None) -> None:
+def test_just_two_work(
+    pytester: pytest.Pytester,
+    enable_aaa_to_bbb: None,
+    enable_ccc_to_ddd: None,
+) -> None:
     pytester.makepyfile(
         """
         # coding: shimtax:aaa_to_bbb:ccc_to_ddd
