@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "shimtax"
-version = "0"
+version = "0.0.0"
 description = "A pluggable manager for syntax rewriting codecs"
 authors = ["Kyle Altendorf <sda@fstab.net>"]
 license = "MIT-0"
@@ -49,7 +49,7 @@ bump = true
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
-build-backend = "poetry.core.masonry.api"
+build-backend = "poetry_dynamic_versioning.backend"
 
 [tool.black]
 target-version =  ['py37', 'py38', 'py39', 'py310', 'py311']
