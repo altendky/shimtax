@@ -41,10 +41,14 @@ The CLI can also remove the ``.pth`` file.
 
    $ .venv/bin/shimtax unregister
 
-If handling this yourself is preferred, you can use the registration helper function.
+There are two options to handle this yourself instead.
 
 .. code-block:: python
 
    import shimtax
 
    shimtax.register()
+
+.. code-block:: python
+
+   import shimtax.register_on_import
