@@ -27,7 +27,7 @@ jobs:
         python:
           - name: CPython 3.9
             tox: py39
-            action: 3.9
+            action: "3.9"
         task:
           - name: Build
             tox: build
@@ -35,6 +35,7 @@ jobs:
     env:
       # Should match name above
       JOB_NAME: ${{ matrix.task.name }} - ${{ matrix.os.name }} ${{ matrix.python.name }}
+      TOXENV: ${{ matrix.task.tox }}
 
     steps:
     - uses: actions/checkout@v3
@@ -47,15 +48,13 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip setuptools wheel
-        python -m pip install build twine
+        python -m pip install --upgrade tox
 
     - uses: twisted/python-info-action@v1
 
-    - name: Build
+    - name: Tox
       run: |
-        python -m build --outdir dist/ .
-        twine check dist/*
+        tox
 
     - name: Publish
       uses: actions/upload-artifact@v3
@@ -72,6 +71,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        task:
+          - name: Test
+            tox: test
+            coverage: true
+          - name: Check hints
+            tox: check-hints
+            coverage: false
         os:
           - name: Linux
             runs-on: ubuntu-latest
@@ -79,33 +85,23 @@ jobs:
           - name: macOS
             runs-on: macos-latest
             matrix: macos
+          - name: Windows
+            runs-on: windows-latest
+            matrix: windows
         python:
           - name: CPython 3.7
             tox: py37
-            action: 3.7
+            action: "3.7"
           - name: CPython 3.8
             tox: py38
-            action: 3.8
+            action: "3.8"
           - name: CPython 3.9
             tox: py39
-            action: 3.9
+            action: "3.9"
           - name: CPython 3.10
             tox: py310
-            action: 3.10
-        task:
-          - name: Test
-            tox: test
-            coverage: true
+            action: "3.10"
         include:
-          - task:
-              name: Check
-              tox: check
-            os:
-              name: Linux
-              runs-on: ubuntu-latest
-            python:
-              name: CPython 3.9
-              action: 3.9
           - task:
               name: Check format
               tox: check-format
@@ -114,7 +110,7 @@ jobs:
               runs-on: ubuntu-latest
             python:
               name: CPython 3.9
-              action: 3.9
+              action: "3.9"
 
 
     env:
@@ -195,7 +191,7 @@ jobs:
               runs-on: ubuntu-latest
             python:
               name: CPython 3.8
-              action: 3.8
+              action: "3.8"
             task:
               name: Coverage
               tox: check-coverage

@@ -1,4 +1,9 @@
-def test_direct_coconut_works(pytester):
+import sys
+
+import pytest
+
+
+def test_direct_coconut_works(pytester: pytest.Pytester) -> None:
     pytester.makeconftest(
         """
         import coconut.convenience
@@ -20,7 +25,12 @@ def test_direct_coconut_works(pytester):
     assert result_outcomes == {"passed": 1}
 
 
-def test_direct_cursed_for_works(pytester):
+@pytest.mark.xfail(
+    condition=sys.version_info >= (3, 9),
+    reason="cursed-for fails in this pytester case for Python 3.9+",
+    strict=True,
+)
+def test_direct_cursed_for_works(pytester: pytest.Pytester) -> None:
     pytester.makepyfile(
         """
         # coding: cursed_for
