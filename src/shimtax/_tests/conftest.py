@@ -9,7 +9,7 @@ import pytest
 class Conftest:
     path: pathlib.Path
 
-    def append(self, text: str):
+    def append(self, text: str) -> None:
         with self.path.open("a") as file:
             file.write(
                 textwrap.dedent(
@@ -24,7 +24,7 @@ def conftest(pytester: pytest.Pytester) -> Conftest:
 
 
 @pytest.fixture(name="enable_shimtax", autouse=True)
-def enable_shimtax(conftest: Conftest):
+def enable_shimtax(conftest: Conftest) -> None:
     conftest.append(
         """
         import codecs
@@ -37,7 +37,7 @@ def enable_shimtax(conftest: Conftest):
 
 
 @pytest.fixture(name="enable_aaa_to_bbb")
-def enable_aaa_to_bbb_fixture(conftest: Conftest):
+def enable_aaa_to_bbb_fixture(conftest: Conftest) -> None:
     conftest.append(
         """
         import codecs
@@ -50,7 +50,7 @@ def enable_aaa_to_bbb_fixture(conftest: Conftest):
 
 
 @pytest.fixture(name="enable_ccc_to_ddd")
-def enable_ccc_to_ddd_fixture(conftest: Conftest):
+def enable_ccc_to_ddd_fixture(conftest: Conftest) -> None:
     conftest.append(
         """
         import codecs

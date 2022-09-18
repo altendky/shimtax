@@ -51,30 +51,30 @@ def test_direct_cursed_for_works(pytester: pytest.Pytester) -> None:
     assert result_outcomes == {"passed": 1}
 
 
-def test_pattern_none():
+def test_pattern_none() -> None:
     result = next(shimtax._core.pattern.finditer("shimtax"))
     assert result["rest"] == ""
 
 
-def test_pattern_two():
+def test_pattern_two() -> None:
     result = next(shimtax._core.pattern.finditer("shimtax:a:b"))
     assert result["rest"] == ":a:b"
 
 
-def test_get_codec_names_none():
+def test_get_codec_names_none() -> None:
     assert shimtax._core.get_codec_names("shimtax") == []
 
 
-def test_get_codec_names_two():
+def test_get_codec_names_two() -> None:
     assert shimtax._core.get_codec_names("shimtax:a:b") == ["a", "b"]
 
 
-def test_get_codec_names_two():
+def test_get_codec_names_raises_for_extra_text() -> None:
     with pytest.raises(shimtax.errors.CodingNotFound):
         shimtax._core.get_codec_names("shimtax:a+")
 
 
-def test_just_aaa_to_bbb_works(pytester: pytest.Pytester, enable_aaa_to_bbb) -> None:
+def test_just_aaa_to_bbb_works(pytester: pytest.Pytester, enable_aaa_to_bbb: None) -> None:
     pytester.makepyfile(
         """
         # coding: shimtax:aaa_to_bbb
@@ -91,7 +91,7 @@ def test_just_aaa_to_bbb_works(pytester: pytest.Pytester, enable_aaa_to_bbb) -> 
     assert result_outcomes == {"passed": 1}
 
 
-def test_just_ccc_to_ddd_works(pytester: pytest.Pytester, enable_ccc_to_ddd) -> None:
+def test_just_ccc_to_ddd_works(pytester: pytest.Pytester, enable_ccc_to_ddd: None) -> None:
     pytester.makepyfile(
         """
         # coding: shimtax:ccc_to_ddd
@@ -108,7 +108,7 @@ def test_just_ccc_to_ddd_works(pytester: pytest.Pytester, enable_ccc_to_ddd) -> 
     assert result_outcomes == {"passed": 1}
 
 
-def test_just_two_work(pytester: pytest.Pytester, enable_aaa_to_bbb, enable_ccc_to_ddd) -> None:
+def test_just_two_work(pytester: pytest.Pytester, enable_aaa_to_bbb: None, enable_ccc_to_ddd: None) -> None:
     pytester.makepyfile(
         """
         # coding: shimtax:aaa_to_bbb:ccc_to_ddd

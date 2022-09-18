@@ -22,7 +22,7 @@ def register() -> None:
     codecs.register(search_function)
 
 
-def decode(input, errors="strict"):
+def decode(input: bytes, errors: str = "strict") -> typing.Tuple[str, int]:
     text, consumed_bytes = encodings.utf_8.StreamReader.decode(input, errors)
 
     names = get_codec_names(text)
@@ -40,7 +40,7 @@ def search_function(encoding: str) -> typing.Optional[codecs.CodecInfo]:
         return None
 
     return codecs.CodecInfo(
-        encode=lambda *args: None,
+        encode=encodings.utf_8.StreamReader.encode,
         decode=decode,
         name=codec_name,
     )

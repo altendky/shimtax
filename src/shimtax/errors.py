@@ -3,5 +3,5 @@ class ShimtaxError(Exception):
 
 
 class CodingNotFound(ShimtaxError):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__("Unable to find shimtax coding")
