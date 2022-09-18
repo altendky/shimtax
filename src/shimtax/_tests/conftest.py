@@ -4,6 +4,9 @@ import textwrap
 import attrs
 import pytest
 
+# TODO: update after resolution in https://github.com/pytest-dev/pytest/issues/7469
+from _pytest.fixtures import SubRequest
+
 
 @attrs.define
 class Conftest:
@@ -23,8 +26,17 @@ def conftest(pytester: pytest.Pytester) -> Conftest:
     return Conftest(path=pytester.path.joinpath("conftest.py"))
 
 
-@pytest.fixture(name="enable_shimtax", autouse=True)
-def enable_shimtax(conftest: Conftest) -> None:
+@pytest.fixture(name="_set_pytester_method_subprocess", autouse=True)
+def _set_pytester_method_subprocess(pytester: pytest.Pytester) -> None:
+    # TODO: this is a hack since addopts=--runpytest subprocess failed with tox
+    pytester._method = "subprocess"
+
+
+@pytest.fixture(name="_enable_shimtax", autouse=True)
+def enable_shimtax_fixture(request: SubRequest, conftest: Conftest) -> None:
+    if "no_shimtax" in request.keywords:
+        return
+
     conftest.append(
         """
         import codecs
